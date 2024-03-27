@@ -1,0 +1,19 @@
+on: 
+    push:
+    workflow_dispatch:
+    schedule: # every monday morning
+    - cron: '0 0 * * 1'
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        steps:
+        - uses: cpanato/gptscript-installer@main
+        - shell: bash
+          run: | 
+            curl -sO https://raw.githubusercontent.com/gptscript-ai/gptscript/main/examples/sqlite-download.gpt
+            gptscript --list-models
+            gptscript --list-tools
+            gptscript --quiet=false sqlite-download.gpt
+          env:
+            OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
