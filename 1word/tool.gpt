@@ -1,0 +1,6 @@
+name: oneword
+description: summarise text into one word
+tools: sys.read
+args: file: input text to summarise
+
+Summarize {file} to a single word.
